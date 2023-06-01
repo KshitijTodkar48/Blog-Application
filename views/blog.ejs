@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include("./partials/head") %>
+    <style>
+        .paragraph-container {
+          max-width: 100%;
+          overflow-x: auto;
+        }
+        .paragraph-content {
+          white-space: pre-wrap;
+          font-size: 20px;
+        }
+    </style>
+    <title>Blog</title>
+</head>
+<body>
+    <%- include("./partials/navbar") %>
+
+    <div class="container mt-4 paragraph-container">
+        <h1><%= blog.title %></h1>
+        <img src="<%= blog.coverImageURL %>" alt="" width="700px" class="m-3">
+        <p class="paragraph-content m-3"><%= blog.body %></p>
+    </div>
+
+    <div class="container mt-4" style="font-weight: bold; font-size: 18px;">
+        - written by
+        <img src="<%= blog.createdBy.profileImage %>" alt="" width="50px">
+        <%= blog.createdBy.fullName %>
+    </div>
+
+    <div class="container mt-3">
+        <h2>Comments (<%= comments.length %>)</h2>
+        <% if (locals.user) { %>
+            <form action="/blog/comment/<%= blog._id %>" method="post">
+                <div class="mb-3">
+                    <input type="text" class="form-control" id="comment" name="content"
+                     placeholder="Enter your comment">
+                    <button type="submit" class="btn btn-primary mt-3">Comment</button> 
+                </div>
+            </form>
+        <% } %>
+        <div class="mt-3">
+            <% comments.forEach(comment => { %>
+                <img src="<%= comment.createdBy.profileImage %>" alt="" width="35px">
+                <%= comment.createdBy.fullName %>
+                <p style="margin-left: 37px; font-size: 20px;"><%= comment.content %></p>
+            <% }) %>
+        </div>
+    </div>
+
+    <%- include("./partials/scripts") %>
+</body>
+</html>    

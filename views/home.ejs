@@ -8,15 +8,21 @@
     <%- include("./partials/navbar") %>
 
     <div class="container mt-3">
+      <div class="row row-cols-4">
         <% blogs.forEach(blog => { %>
-            <div class="card" style="width: 18rem;">
-                <img src="<%= blog.coverImageURL %>" class="card-img-top" alt="...">
-                <div class="card-body">
+          <div class="col">
+            <div class="card col" style="width: 20rem;">
+                <img src="<%= blog.coverImageURL %>" class="card-img-top" alt="..."
+                height="200px">
+                <div class="card-body" 
+                style="display: flex; flex-direction: column;align-items: center;">
                   <h5 class="card-title"><%= blog.title %></h5>
-                  <a href="/blog/<%= blog._id %>" class="btn btn-primary">View</a>
+                  <a href="/blog/<%= blog._id %>" class="btn btn-primary mt-2">View</a>
                 </div>
               </div>
+          </div>
         <% }) %>
+      </div>
     </div>
 
     <%- include("./partials/scripts") %>
